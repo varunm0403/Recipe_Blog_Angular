@@ -1,0 +1,64 @@
+<div class="max-w-xl mx-auto mt-10 p-4 sm:p-6 bg-white shadow-md rounded-md">
+    <h2 class="text-2xl font-bold text-green-600 mb-4 text-center">SUBMIT YOUR RECIPE</h2>
+  
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <!-- Name -->
+      <input type="text" formControlName="name" placeholder="Recipe name" class="w-full border p-2 rounded"/>
+      <section *ngIf="recipeForm.get('name')?.touched && recipeForm.get('name')?.invalid" class="text-red-500 text-sm">
+        Recipe name is required.
+      </section>
+      
+      <!-- Upload Image -->
+      <div class="w-full border p-2 rounded">
+        <input type="file" (change)="onImageSelected($event)" accept="image/*" class="w-full text-sm" />
+        <div *ngIf="imagePreview" class="mt-2">
+          <img [src]="imagePreview" class="h-24 rounded object-cover" />
+        </div>
+      </div>
+  
+      <!-- Description -->
+      <textarea formControlName="description" placeholder="Recipe description and steps" class="w-full border p-2 rounded h-24 resize-none"></textarea>
+  
+      <!-- Cuisine & Category -->
+      <div class="flex flex-col sm:flex-row sm:gap-4">
+        <select formControlName="cuisine" class="w-full sm:w-1/2 border p-2 rounded mt-2 sm:mt-0">
+          <option value="" disabled selected>Cuisine type</option>
+          <option>Indian</option>
+          <option>Chinese</option>
+          <option>Italian</option>
+        </select>
+  
+        <select formControlName="category" class="w-full sm:w-1/2 border p-2 rounded mt-2 sm:mt-0">
+          <option value="" disabled selected>Category</option>
+          <option>Starter</option>
+          <option>Main Course</option>
+          <option>Dessert</option>
+        </select>
+      </div>
+  
+      <!-- Tags & Ingredients -->
+      <input type="text" formControlName="tags" placeholder="Mention tags separated by comma," class="w-full border p-2 rounded"/>
+      <input type="text" formControlName="ingredients" placeholder="Mention tags ingredients by comma," class="w-full border p-2 rounded"/>
+  
+      <!-- Cooking Time -->
+      <input type="number" formControlName="cookingTime" placeholder="Cooking time in minutes" class="w-full border p-2 rounded"/>
+  
+      <!-- Difficulty -->
+      <select formControlName="difficulty" class="w-full border p-2 rounded">
+        <option value="" disabled selected>Difficulty level</option>
+        <option>Easy</option>
+        <option>Medium</option>
+        <option>Hard</option>
+      </select>
+  
+      <!-- Dietary Restrictions -->
+      <input type="text" formControlName="dietaryRestrictions" placeholder="Mention dietary restrictions" class="w-full border p-2 rounded"/>
+  
+      <!-- Buttons -->
+      <div class="flex justify-between pt-2">
+        <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600" [disabled]="recipeForm.invalid">SUBMIT</button>
+        <button type="button" class="border border-green-500 text-green-600 px-6 py-2 rounded hover:bg-green-50" (click)="onCancel()">CANCEL</button>
+      </div>
+    </form>
+  </div>
+  

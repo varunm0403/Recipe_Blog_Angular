@@ -1,0 +1,84 @@
+<div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 py-10 px-6 md:px-20">
+    <div class="max-w-7xl mx-auto space-y-10">
+      <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">Recommended Recipes</h2>
+  
+      <!-- Filters -->
+      <!-- Filters -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+  <div class="relative w-full">
+    <select
+      [(ngModel)]="selectedCuisine"
+      (change)="applyFilters()"
+      class="w-full appearance-none bg-white border border-gray-300 text-gray-700 py-2 pl-4 pr-10 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
+    >
+      <option value="">Cuisine Type</option>
+      <option *ngFor="let cuisine of availableCuisines">{{ cuisine }}</option>
+    </select>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500">
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
+      </svg>
+    </div>
+  </div>
+
+  <div class="relative w-full">
+    <select
+      [(ngModel)]="selectedCategory"
+      (change)="applyFilters()"
+      class="w-full appearance-none bg-white border border-gray-300 text-gray-700 py-2 pl-4 pr-10 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
+    >
+      <option value="">Category</option>
+      <option *ngFor="let category of availableCategories">{{ category }}</option>
+    </select>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500">
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
+      </svg>
+    </div>
+  </div>
+
+  <div class="relative w-full">
+    <select
+      [(ngModel)]="selectedCookingTime"
+      (change)="applyFilters()"
+      class="w-full appearance-none bg-white border border-gray-300 text-gray-700 py-2 pl-4 pr-10 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
+    >
+      <option value="">Cooking Time</option>
+      <option value="15">≤ 15 mins</option>
+      <option value="30">≤ 30 mins</option>
+      <option value="60">≤ 60 mins</option>
+    </select>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500">
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
+      </svg>
+    </div>
+  </div>
+
+  <div class="relative w-full">
+    <select
+      [(ngModel)]="selectedDifficulty"
+      (change)="applyFilters()"
+      class="w-full appearance-none bg-white border border-gray-300 text-gray-700 py-2 pl-4 pr-10 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
+    >
+      <option value="">Difficulty</option>
+      <option *ngFor="let diff of availableDifficulties">{{ diff }}</option>
+    </select>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500">
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M5.5 7l4.5 4.5L14.5 7h-9z" />
+      </svg>
+    </div>
+  </div>
+</div>
+
+      <!-- Recipe Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-6">
+        <app-recipe-card
+          *ngFor="let recipe of filteredRecipes"
+          [recipe]="recipe"
+        ></app-recipe-card>
+      </div>
+    </div>
+  </div>
+  

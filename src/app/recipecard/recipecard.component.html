@@ -1,0 +1,69 @@
+<div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+  <!-- Image and Heart -->
+  <div class="relative" >
+    <img [src]="recipe.image" alt="Recipe Image" class="w-full h-40 object-cover"
+    (click)="goToRecipeDetail()"/>
+
+   <!-- Heart Button -->
+
+   <button 
+   (click)="toggleFavorite()" 
+   class="absolute top-2 right-2 z-10 bg-white rounded-full p-1 shadow-md"
+ >
+   <svg 
+     xmlns="http://www.w3.org/2000/svg" 
+     fill="currentColor" 
+     viewBox="0 0 24 24" 
+     class="w-6 h-6 transition-all duration-200 ease-in-out"
+     [ngClass]="isFavorite ? 'text-red-500' : 'text-gray-300'"
+   >
+     <path 
+       fill-rule="evenodd" 
+       d="M12.1 21.35l-1.1-1.01C5.14 15.25 2 12.29 2 8.5 2 5.42 
+          4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 
+          14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.79-3.14 
+          6.75-8.9 11.84l-1.1 1.01z" 
+       clip-rule="evenodd"
+     />
+   </svg>
+ </button>
+ 
+  </div>
+
+  <div class="p-4">
+    <div class="flex items-center justify-between">
+      <h2 class="text-lg font-bold">{{ recipe.name }}</h2>
+      <img src="https://i.pravatar.cc/40" class="w-8 h-8 rounded-full" alt="user" />
+    </div>
+
+    <p class="text-gray-500 text-sm">{{ recipe.category }}</p>
+
+    <div class="flex flex-wrap gap-2 my-2" *ngIf="recipe.tags">
+      <span
+        *ngFor="let tag of recipe.tags.split(',')"
+        class="bg-gray-100 text-sm px-2 py-1 rounded-full"
+      >
+        {{ tag }}
+      </span>
+    </div>
+
+    <div class="flex items-center gap-1 text-orange-500">
+      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 fill-current cursor-pointer"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.618 4.975a1 1 0 00.95.69h5.243c.969 0 1.371 1.24.588 1.81l-4.244 3.086a1 1 0 00-.364 1.118l1.618 4.975c.3.921-.755 1.688-1.538 1.118l-4.244-3.086a1 1 0 00-1.176 0l-4.244 3.086c-.783.57-1.838-.197-1.538-1.118l1.618-4.975a1 1 0 00-.364-1.118L2.792 10.4c-.783-.57-.38-1.81.588-1.81h5.243a1 1 0 00.95-.69l1.618-4.975z"
+          />
+        </svg>
+      </ng-container>
+      <span class="text-sm text-gray-600 ml-2">5k</span>
+    </div>
+  </div>
+</div>

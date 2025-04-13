@@ -1,0 +1,17 @@
+<div class="p-4">
+    <h2 class="text-2xl font-bold mb-4">Your Favorite Recipes ❤️</h2>
+  
+    <div *ngIf="favoriteRecipes.length === 0" class="text-gray-500 text-center">
+      No favorites yet. Start loving some recipes!
+    </div>
+  
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <app-recipe-card
+        *ngFor="let recipe of favoriteRecipes"
+        [recipe]="recipe"
+        [isFavorite]="isFavorite(recipe.id)"
+        (favoriteToggled)="toggleFavorite($event)">
+      </app-recipe-card>
+    </div>
+  </div>
+  

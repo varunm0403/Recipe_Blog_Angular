@@ -1,0 +1,113 @@
+<!-- Header / Navbar -->
+<header class="sticky top-0 z-50 flex items-center justify-between bg-[#444444] p-2 relative">
+  <section class="flex justify-between items-center gap-4">
+    <button (click)="toggleMenu()" class = "ml-2">☰</button>
+    <img
+      src="assets/images/logo.png"
+      alt="Logo"
+      class="max-w-[30px] max-h-[30px] rounded-full object-contain hover:scale-105 transition duration-300 ease-in-out"
+    />
+    <section *ngIf="isLoggedIn" class="ml-4 text-white text-sm hidden sm:inline">
+      Welcome, {{ loggedInUserFirstName }} 👋
+    </section>
+  </section>
+
+  <section class="border rounded-xl overflow-hidden mr-36">
+    <input
+      type="text"
+      placeholder="Search by recipes, cuisine, category, tags..."
+      class="px-3 py-1 rounded-md w-[300px] text-sm focus:outline-none hidden sm:inline"
+    />
+  </section>
+
+  <button
+    class="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold p-2 rounded-2xl shadow-md transition-all duration-300"
+    (click)="isLoggedIn ? logout() : toggleAuthPopup()"
+  >
+  {{ isLoggedIn ? 'Logout' : 'Login' }}
+  </button>
+</header>
+
+<!-- Side Menu -->
+<aside
+  class="fixed top-0 left-0 h-full w-[250px] bg-white shadow-lg transform transition-transform duration-300 z-50"
+  [ngClass]="{ '-translate-x-full': !isMenuOpen, 'translate-x-0': isMenuOpen }"
+  (click)="$event.stopPropagation()"
+>
+  <ul class="flex flex-col gap-4 p-4 mt-40">
+    <ul>
+      <li class="hover:text-blue-600 cursor-pointer flex items-center justify-between border-b border-gray-200 px-4 py-2"
+      (click)="navigateToSubmitRecipe()">
+        SUBMIT YOUR RECIPE
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </li>
+      <li class="hover:text-blue-600 cursor-pointer flex items-center justify-between border-b border-gray-200 px-4 py-2"
+        (click)="navigateToFavorite()">
+        VIEW FAVORITES
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </li>
+      <li class="hover:text-blue-600 cursor-pointer flex items-center justify-between border-b border-gray-200 px-4 py-2"
+      (click)="navigateToViewRecipe()">
+        VIEW YOUR RECIPES
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </li>
+      <li class="hover:text-blue-600 cursor-pointer flex items-center justify-between border-b border-gray-200 px-4 py-2"
+      (click)="navigateToRecommendedRecipe()">
+        RECOMMENDED RECIPES
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </li>
+      <li class="hover:text-blue-600 cursor-pointer flex items-center justify-between border-b border-gray-200 px-4 py-2"
+      (click) = "navigateToUsers()">
+        Browse Users
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </li>
+    </ul>
+    
+  </ul>
+</aside>
+
+
+<!-- Auth Modal -->
+<div *ngIf="showAuthPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-xl w-[90%] sm:w-[400px] p-6 relative shadow-xl">
+    <!-- Close Button -->
+    <button (click)="closePopup()" class="absolute top-2 right-4 text-xl text-gray-500 hover:text-red-600">✖</button>
+
+    <!-- Login Form -->
+    <div *ngIf="showLoginForm">
+      <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
+      <input type="email" [(ngModel)]="formData.email" placeholder="Email" class="input-field mb-3" />
+      <input type="password" [(ngModel)]="formData.password" placeholder="Password" class="input-field mb-3" />
+      <button (click)="login()" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Login</button>
+      <p class="text-center mt-3 text-sm">Don't have an account? 
+        <span class="text-blue-600 cursor-pointer" (click)="switchToRegister()">Register</span>
+      </p>
+    </div>
+
+    <!-- Register Form -->
+    <div *ngIf="!showLoginForm">
+      <h2 class="text-xl font-bold mb-4 text-center">Register</h2>
+      <input type="text" [(ngModel)]="formData.firstName" placeholder="First Name" class="input-field mb-2" />
+      <input type="text" [(ngModel)]="formData.lastName" placeholder="Last Name" class="input-field mb-2" />
+      <input type="email" [(ngModel)]="formData.email" placeholder="Email" class="input-field mb-2" />
+      <input type="password" [(ngModel)]="formData.password" placeholder="Password" class="input-field mb-2" />
+      <input type="password" [(ngModel)]="formData.retypePassword" placeholder="Retype Password" class="input-field mb-2" />
+      <input type="text" [(ngModel)]="formData.country" placeholder="Country" class="input-field mb-3" />
+      <button (click)="register()" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">Register</button>
+      <p class="text-center mt-3 text-sm">Already have an account? 
+        <span class="text-blue-600 cursor-pointer" (click)="switchToLogin()">Login</span>
+      </p>
+    </div>
+  </div>
+</div>
+

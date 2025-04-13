@@ -1,0 +1,27 @@
+<div class = "background-wrapper">
+<figure class="absolute top-0 left-0 w-full min-h-screen -z-10 fade-bg"
+  style="width: 100%; background-image: url('/assets/background.svg'); background-size: cover;">
+</figure>
+</div>
+
+<section class="flex flex-col items-center justify-center mt-20 font-bold">
+  <section class="self-center">What are your favourite cuisines?</section>
+
+  <section class="flex mt-10 gap-4 flex-wrap items-center justify-center">
+    <button
+      *ngFor="let c of countries"
+      class="w-[100px] h-[100px] rounded-full shadow border border-gray-300 text-white font-semibold text-sm flex items-center justify-center bg-cover bg-center transition duration-300 transform hover:scale-105 hover:brightness-90"
+      [ngStyle]="{ 'background-image': 'url(' + c.image + ')' }"
+      [attr.aria-label]="c.country"
+    >
+      {{ c.country }}
+    </button>
+  </section>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-6">
+    <app-recipe-card
+      *ngFor="let recipe of filteredRecipes"
+      [recipe]="recipe"
+    ></app-recipe-card>
+  </div>
+</section>

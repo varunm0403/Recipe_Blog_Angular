@@ -1,0 +1,8 @@
+<div class="p-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  <app-recipe-card
+    *ngFor="let recipe of userRecipes"
+    [recipe]="recipe"
+    [isFavorite]="isFavorite(recipe.id)"
+    (favoriteToggled)="toggleFavorite($event)">
+  </app-recipe-card>
+</div>

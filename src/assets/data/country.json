@@ -1,0 +1,39 @@
+[
+    {
+     "country" : "america",
+     "image" : "/assets/images/foodicon.png"
+    },
+    {
+        "country" : "antartica",
+        "image" : "/assets/images/foodicon.png"
+       },
+       {
+        "country" : "Italian",
+        "image" : "/assets/images/foodicon.png"
+       },
+       {
+        "country" : "Spanish",
+        "image" : "/assets/images/foodicon.png"
+       },
+       {
+        "country" : "Chinese",
+        "image" : "/assets/images/foodicon.png"
+       },
+       {
+        "country" : "Thai",
+        "image" : "/assets/images/foodicon.png"
+       },
+       {
+        "country" : "Indian",
+        "image" : "/assets/images/foodicon.png"
+       },
+       {
+        "country" : "French",
+        "image" : "/assets/images/foodicon.png"
+       },
+       {
+        "country" : "Mexican",
+        "image" : "/assets/images/foodicon.png"
+       }
+
+]
